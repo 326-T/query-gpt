@@ -3,6 +3,8 @@ package org.example.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.constants.QueryType;
+import org.example.persistence.entity.ExecutedQuery;
+import org.example.persistence.mapper.ExecutedQueryMapper;
 import org.example.persistence.mapper.MapMapper;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +12,12 @@ import org.springframework.stereotype.Service;
 public class SqlService {
 
   private final MapMapper mapMapper;
-  private final ObjectMapper objectMapper;
+  private final ExecutedQueryMapper executedQueryMapper;
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
-  public SqlService(MapMapper mapMapper, ObjectMapper objectMapper) {
+  public SqlService(MapMapper mapMapper, ExecutedQueryMapper executedQueryMapper) {
     this.mapMapper = mapMapper;
-    this.objectMapper = objectMapper;
+    this.executedQueryMapper = executedQueryMapper;
   }
 
   public String execute(String sql) throws JsonProcessingException {
@@ -35,6 +38,7 @@ public class SqlService {
       }
       case CREATE_TABLE -> {
         mapMapper.createTable(sql);
+        executedQueryMapper.insert(ExecutedQuery.builder().query(sql).build());
         yield "テーブルが作成されました。";
       }
       default -> "クエリの発行に失敗しました。再度お問い合わせください。";
