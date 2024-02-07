@@ -34,7 +34,7 @@ class MapMapperTest {
       @DisplayName("企業が1件取得できること")
       void selectOneCompany() {
         // when
-        List<Map<String, String>> actual = mapMapper.select("SELECT * FROM companies WHERE id = 1");
+        List<Map<String, String>> actual = mapMapper.select("SELECT * FROM companies WHERE id = 1;");
         System.out.println(actual);
         // then
         assertThat(actual).extracting("ID", "NAME", "DESCRIPTION", "CREATED_AT", "UPDATED_AT")
@@ -47,7 +47,7 @@ class MapMapperTest {
       @DisplayName("企業が複数取得できること")
       void selectAllCompanies() {
         // when
-        List<Map<String, String>> actual = mapMapper.select("SELECT * FROM companies");
+        List<Map<String, String>> actual = mapMapper.select("SELECT * FROM companies;");
         System.out.println(actual);
         // then
         assertThat(actual).extracting("ID", "NAME", "DESCRIPTION", "CREATED_AT", "UPDATED_AT")
@@ -108,7 +108,7 @@ class MapMapperTest {
             SET name = 'E株式会社', description = 'E株式会社の説明',
                 created_at = '2024-01-04 00:00:00.000',
                 updated_at = '2024-01-05 00:00:00.000'
-            WHERE id = 1
+            WHERE id = 1;
             """);
         // then
         List<Map<String, String>> actual = mapMapper.select("SELECT * FROM companies WHERE id = 1");
@@ -132,7 +132,7 @@ class MapMapperTest {
       @DisplayName("企業が1件削除できること")
       void deleteOneCompany() {
         // when
-        mapMapper.delete("DELETE FROM companies WHERE id = 2");
+        mapMapper.delete("DELETE FROM companies WHERE id = 2;");
         // then
         List<Map<String, String>> actual = mapMapper.select("SELECT * FROM companies WHERE id = 2");
         assertThat(actual).isEmpty();
