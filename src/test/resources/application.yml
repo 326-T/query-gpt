@@ -20,3 +20,9 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+gpt:
+  baseUrl: http://localhost:18080
+  askPath: /v1/chat/completions
+  model: gpt-3.5-turbo
+  apiKey: secret

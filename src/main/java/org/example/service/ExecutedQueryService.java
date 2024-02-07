@@ -17,4 +17,7 @@ public class ExecutedQueryService {
   public List<ExecutedQuery> index() {
     return executedQueryMapper.findAll();
   }
+  public List<ExecutedQuery> indexSchemas() {
+    return executedQueryMapper.findAllSchemas();
+  }
 }

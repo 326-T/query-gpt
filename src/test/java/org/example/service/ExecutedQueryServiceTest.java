@@ -53,4 +53,35 @@ class ExecutedQueryServiceTest {
       }
     }
   }
+
+  @Nested
+  class IndexSchemas {
+
+    @Nested
+    @DisplayName("正常系")
+    class Regular {
+
+      @Test
+      @DisplayName("実行済みクエリが取得できること")
+      void index() {
+        // given
+        when(executedQueryMapper.findAllSchemas()).thenReturn(List.of(
+            ExecutedQuery.builder().query("SELECT * FROM companies;").executedAt(
+                LocalDateTime.of(2020, 1, 1, 0, 0, 0)).build(),
+            ExecutedQuery.builder().query("SELECT * FROM products;")
+                .executedAt(LocalDateTime.of(2020, 1, 2, 0, 0, 0)).build(),
+            ExecutedQuery.builder().query("SELECT * FROM orders;")
+                .executedAt(LocalDateTime.of(2020, 1, 3, 0, 0, 0)).build()
+        ));
+        // when
+        List<ExecutedQuery> actual = executedQueryService.indexSchemas();
+        // then
+        assertThat(actual).extracting(ExecutedQuery::getQuery, ExecutedQuery::getExecutedAt)
+            .containsExactly(
+                tuple("SELECT * FROM companies;", LocalDateTime.of(2020, 1, 1, 0, 0, 0)),
+                tuple("SELECT * FROM products;", LocalDateTime.of(2020, 1, 2, 0, 0, 0)),
+                tuple("SELECT * FROM orders;", LocalDateTime.of(2020, 1, 3, 0, 0, 0)));
+      }
+    }
+  }
 }

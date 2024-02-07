@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 public class ExecutedQuery {
 
   private String query;
+  private Boolean isSchema;
   private LocalDateTime executedAt;
 }
