@@ -6,11 +6,11 @@ spring:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4
+    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4;MODE=PostgreSQL
     username: test_db
     password: test_db
   flyway:
-    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4
+    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4;MODE=PostgreSQL
     user: test_db
     password: test_db
     clean-on-validation-error: true
@@ -26,3 +26,4 @@ gpt:
   askPath: /v1/chat/completions
   model: gpt-3.5-turbo
   apiKey: secret
+  timeout: 60

@@ -12,4 +12,5 @@ public class GPTClientConfig {
   private String askPath;
   private String apiKey;
   private String model;
+  private Long timeout;
 }

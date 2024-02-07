@@ -1,11 +1,9 @@
 package org.example.web.controller;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.List;
 import org.example.persistence.entity.ExecutedQuery;
@@ -53,7 +51,7 @@ class SqlControllerTest {
             ExecutedQuery.builder().query("SELECT * FROM companies;").isSchema(false).build(),
             ExecutedQuery.builder().query("SELECT * FROM products;").isSchema(false).build()
         ));
-        when(promptService.prompt(anyList())).thenReturn("prompt");
+        when(promptService.prompt(anyList(), anyString())).thenReturn("prompt");
         when(gptService.generateResponse(anyString())).thenReturn("SELECT * FROM companies;");
         when(sqlService.execute(anyString())).thenReturn("test");
         // when and then

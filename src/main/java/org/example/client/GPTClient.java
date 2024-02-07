@@ -3,6 +3,7 @@ package org.example.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,6 +30,8 @@ public class GPTClient {
     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
     loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     builder.addInterceptor(loggingInterceptor);
+    builder.connectTimeout(config.getTimeout(), TimeUnit.SECONDS);
+    builder.readTimeout(config.getTimeout(), TimeUnit.SECONDS);
     this.client = builder.build();
   }
 

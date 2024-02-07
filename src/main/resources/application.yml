@@ -5,10 +5,14 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    url: jdbc:h2:mem:sample_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4;MODE=PostgreSQL
+    username: sample_db
+    password: sample_db
   flyway:
-    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4
-    user: test_db
-    password: test_db
+    url: jdbc:h2:mem:sample_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=4;MODE=PostgreSQL
+    user: sample_db
+    password: sample_db
     clean-on-validation-error: true
     baseline-on-migrate: true
     clean-disabled: false
@@ -20,5 +24,6 @@ mybatis:
 gpt:
   baseUrl: https://api.openai.com
   askPath: /v1/chat/completions
-  model: gpt-3.5-turbo
+  model: gpt-4
   apiKey: ${OPENAI_API_KEY}
+  timeout: 60

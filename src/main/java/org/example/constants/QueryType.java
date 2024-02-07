@@ -7,12 +7,12 @@ import lombok.Getter;
 @Getter
 public enum QueryType {
 
-  SELECT("select"),
-  INSERT("insert"),
-  UPDATE("update"),
-  DELETE("delete"),
-  CREATE_TABLE("create table"),
-  INVALID("invalid");
+  SELECT("SELECT"),
+  INSERT("INSERT"),
+  UPDATE("UPDATE"),
+  DELETE("DELETE"),
+  CREATE_TABLE("CREATE TABLE"),
+  INVALID("INVALID");
 
   private final String type;
 }

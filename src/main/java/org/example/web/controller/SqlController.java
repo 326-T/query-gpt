@@ -32,7 +32,7 @@ public class SqlController {
   @PostMapping
   public String execute(@RequestBody String requestText) throws IOException {
     List<ExecutedQuery> executedQueries = executedQueryService.indexSchemas();
-    String prompt = promptService.prompt(executedQueries);
+    String prompt = promptService.prompt(executedQueries, requestText);
     String sql = gptService.generateResponse(prompt);
     return sqlService.execute(sql);
   }
